@@ -33,21 +33,12 @@ export function getGithubPagesUrl(
   // Remove leading slash for relative paths
   const relativePath = path.startsWith('/') ? path.slice(1) : path;
   
-  // For production on GitHub Pages, we use paths relative to the repo base
-  // In development, we add a leading slash for absolute paths from the server root
+  // In production (GitHub Pages), we need paths relative to the site root without leading slash
+  // In development, we need leading slash for proper serving from dev server
   const isProduction = process.env.NODE_ENV === 'production';
-  const basePath = isProduction ? '' : '/';
   
-  // For images, we can apply format conversion if needed
-  // This is placeholder logic that would need to be implemented by actual image processing in the build pipeline
-  if (options && isImagePath(relativePath)) {
-    // This is where you'd implement the transformations in a real system
-    // For now, we're just returning the original path
-    // In a production system, this would likely integrate with a tool like Sharp or next/image
-    return `${basePath}${relativePath}`;
-  }
-  
-  return `${basePath}${relativePath}`;
+  // Add leading slash only in development mode
+  return isProduction ? relativePath : `/${relativePath}`;
 }
 
 /**
