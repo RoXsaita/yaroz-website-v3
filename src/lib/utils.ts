@@ -30,8 +30,11 @@ export function getGithubPagesUrl(
   // Handle undefined or empty paths
   if (!path) return '';
   
+  // Make all paths lowercase for GitHub Pages (case-sensitive server)
+  const lowerCasePath = path.toLowerCase();
+  
   // Remove leading slash for relative paths
-  const relativePath = path.startsWith('/') ? path.slice(1) : path;
+  const relativePath = lowerCasePath.startsWith('/') ? lowerCasePath.slice(1) : lowerCasePath;
   
   // In production (GitHub Pages), we need paths relative to the site root without leading slash
   // In development, we need leading slash for proper serving from dev server
@@ -56,9 +59,12 @@ export function getOptimizedImageUrl(
 ): string {
   const { width, height, quality = 80, format = 'auto' } = options;
   
+  // Make sure source path is lowercase
+  const lowerCaseSrc = src.toLowerCase();
+  
   // In a real implementation, this would transform the image
   // For now, we just return the original GitHub Pages URL
-  return getGithubPagesUrl(src);
+  return getGithubPagesUrl(lowerCaseSrc);
 }
 
 /**
@@ -124,9 +130,12 @@ export function isVideoPath(path: string): boolean {
  * Returns a responsive image srcset for optimal loading
  */
 export function generateSrcSet(url: string, widths: number[] = [320, 640, 960, 1280, 1920]): string {
+  // Make sure URL is lowercase
+  const lowerCaseUrl = url.toLowerCase();
+  
   // In a real implementation, this would generate actual srcset with resized versions
   // For now, just return the original URL
-  return url;
+  return lowerCaseUrl;
 }
 
 /**
