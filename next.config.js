@@ -3,10 +3,6 @@
 const nextConfig = {
   output: 'export',
   
-  // Configure for custom domain on GitHub Pages
-  basePath: '',
-  assetPrefix: '',
-  
   // Image optimization settings
   images: {
     unoptimized: true, // Required for static export
