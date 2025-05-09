@@ -3,8 +3,9 @@
 const nextConfig = {
   output: 'export',
   
-  // No basePath or assetPrefix needed with custom domain
-  // The custom domain is handled through the CNAME file
+  // Configure for custom domain on GitHub Pages
+  basePath: '',
+  assetPrefix: '',
   
   // Image optimization settings
   images: {
